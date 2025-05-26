@@ -6,7 +6,7 @@
 // @match         *://*.jeuxvideo.com/forums/*
 // @match         *://*.jeuxvideo.com/recherche/forums/*
 // @run-at        document-start
-// @version       1.2
+// @version       1.3
 // @license       BSD
 // ==/UserScript==
 
@@ -29,6 +29,32 @@ const CSS = '.forum-section{background:var(--jv-block-bg-color);font-family:Robo
   } else {
     injectCustomCSS();
   }
+
+  // 3) Observer les ajouts de <link> pour toujours repositionner ton <style> à la fin
+  new MutationObserver(mutations => {
+    let moved = false;
+    for (const { addedNodes } of mutations) {
+      for (const node of addedNodes) {
+        if (
+          node.nodeType === Node.ELEMENT_NODE &&
+          node.tagName === 'LINK' &&
+          /skin-(common|forum)\.css/.test(node.getAttribute('href'))
+        ) {
+          moved = true;
+        }
+      }
+    }
+    if (moved) {
+      const style = document.getElementById('extra-css');
+      if (style) {
+        style.remove();
+        document.head.appendChild(style);
+      }
+    }
+  }).observe(document.head, { childList: true });
+
+})();
+
 
     // remet les boutons pour éditier le texte gras et compagnie en haut et permet de poster avec tab puis entrer
 (function () {
@@ -92,30 +118,18 @@ const CSS = '.forum-section{background:var(--jv-block-bg-color);font-family:Robo
     init();
 })();
 
+// Tab envoi sur le bouton poster
 
+(function() {
+    'use strict';
 
-
-  // 3) Observer les ajouts de <link> pour toujours repositionner ton <style> à la fin
-  new MutationObserver(mutations => {
-    let moved = false;
-    for (const { addedNodes } of mutations) {
-      for (const node of addedNodes) {
-        if (
-          node.nodeType === Node.ELEMENT_NODE &&
-          node.tagName === 'LINK' &&
-          /skin-(common|forum)\.css/.test(node.getAttribute('href'))
-        ) {
-          moved = true;
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Tab') {
+            event.preventDefault(); // Empêche le comportement par défaut de Tab
+            const postButton = document.querySelector('.simpleButton.postMessage');
+            if (postButton) {
+                postButton.focus();
+            }
         }
-      }
-    }
-    if (moved) {
-      const style = document.getElementById('extra-css');
-      if (style) {
-        style.remove();
-        document.head.appendChild(style);
-      }
-    }
-  }).observe(document.head, { childList: true });
-
+    });
 })();
