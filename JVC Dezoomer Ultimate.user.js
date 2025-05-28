@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         JVC Dezoomer Ultimate
 // @namespace    https://jeuxvideo.com
-// @version      1.6.5
+// @version      1.6.6
 // @description  Script JVC - Permet de remettre le style avant le zoom dégueulasse.
-// @author       FaithCatalyst, StrangerFruit, WayneHuner2, basé sur un ancien code de [Myster], LaBistou880 et NainEnOr
+// @author       FaithCatalyst, StrangerFruit, WayneHuner2, Shiho-Miyano, basé sur un ancien code de [Myster], LaBistou880 et NainEnOr
 // @match        https://www.jeuxvideo.com/*
 // @grant        none
 // @icon         https://jvscript.fr/storage/images/dezoomed-version-ultra.png
