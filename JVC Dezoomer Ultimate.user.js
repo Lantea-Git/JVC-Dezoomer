@@ -78,7 +78,7 @@ let css = '.forum-section{background:var(--jv-block-bg-color);font-family:Roboto
     document.addEventListener('keydown', function(event) {
         if (event.key === 'Tab') {
             event.preventDefault(); // Empêche le comportement par défaut de Tab
-            const postButton = document.querySelector('.simpleButton.postMessage');
+            const postButton = document.querySelector('.simpleButton.postMessage') || document.querySelector('.btn.btn-poster-msg.js-post-message');
             if (postButton) {
                 postButton.focus();
             }
