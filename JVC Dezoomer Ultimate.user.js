@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         JVC Dezoomer Ultimate
 // @namespace    https://jeuxvideo.com
-// @version      1.8
+// @version      1.9
 // @description  Script JVC - Permet de remettre le style avant le zoom dégueulasse.
 // @author       FaithCatalyst, StrangerFruit, WayneHuner2, Senkai, Shiho-Miyano, basé sur un ancien code de [Myster], LaBistou880 et NainEnOr + merci aux retours de tous les forumeurs et notamment Linkpa pour les corrections sur l'affichage des boutons de modération.
 // @match        https://www.jeuxvideo.com/*
@@ -78,7 +78,7 @@ let css = '.forum-section{background:var(--jv-block-bg-color);font-family:Roboto
     document.addEventListener('keydown', function(event) {
         if (event.key === 'Tab') {
             event.preventDefault(); // Empêche le comportement par défaut de Tab
-            const postButton = document.querySelector('.simpleButton.postMessage');
+            const postButton = document.querySelector('.simpleButton.postMessage') || document.querySelector('.btn.btn-poster-msg.js-post-message');
             if (postButton) {
                 postButton.focus();
             }
